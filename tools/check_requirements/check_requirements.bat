@@ -70,25 +70,6 @@ del TempClass.java
 
 echo.
 
-:: Check Maven
-call mvn -v >nul 2>&1
-if errorlevel 1 (
-    echo [FAIL] Maven is not installed.
-) else (
-    echo [OK] Maven is installed.
-    setlocal enabledelayedexpansion
-    for /f "tokens=3" %%a in ('mvn -v ^| find "Apache Maven"') do set MAVEN_VERSION=%%a
-    if "!MAVEN_VERSION!" LSS "%MAVEN_VERSION_MIN%" (
-        echo [FAIL] Maven version !MAVEN_VERSION! is below the minimum required ^(%MAVEN_VERSION_MIN%^).
-    ) else if "%MAVEN_VERSION%" GTR "%MAVEN_MAX_VERSION%" (
-        echo [FAIL] Maven version !MAVEN_VERSION! is above the maximum allowed ^(%MAVEN_MAX_VERSION%^).
-    ) else (
-        echo [OK] Maven version !MAVEN_VERSION! is within the acceptable range ^(%MAVEN_VERSION_MIN% - %MAVEN_VERSION_MAX%^).
-    )
-)
-
-echo.
-
 :: Check Git
 call git --version >nul 2>&1
 if errorlevel 1 (

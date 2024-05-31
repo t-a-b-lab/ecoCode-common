@@ -91,38 +91,3 @@ function check_version_max_java() {
 
 }
 
-### launch requirements checks (command and min version)
-### $1 : the current version
-### $2 : the minimum version to check
-function check_version_min_maven() {
-
-  declare -a version="$1"
-  declare -a version_min="$2"
-
-  if [[ "$version_min" < "$version" || "$version_min" = "$version" ]]; then
-    echo -e "   ✅ min version"
-  else
-    echo -e "   ❌ min version : please ${PINK}check or install good version ${NC}"
-  fi
-
-  echo -e "        (current version : $version / min version : '$version_min')"
-
-}
-
-### launch requirements checks (command and max version)
-### $1 : the current version
-### $2 : the maximum version to check
-function check_version_max_maven() {
-
-  declare -a version="$1"
-  declare -a version_max="$2"
-
-  if [[ "$version" < "$version_max" || "$version" = "$version_max" ]]; then
-    echo -e "   ✅ max version"
-  else
-    echo -e "   ❌ max version : please ${PINK}check or install good version ${NC}"
-  fi
-
-  echo -e "        (current version : $version / max version : '$version_max')"
-
-}
